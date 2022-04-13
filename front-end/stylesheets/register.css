@@ -1,0 +1,38 @@
+.background {
+  background-image: url("../images/bg5.jpeg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+}
+
+input {
+  border: none;
+  outline: none;
+  margin: 0rem 0.5rem;
+  width: 90%;
+  background-color: rgb(144, 208, 238);
+  color: black;
+  font-size: 1.5rem;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+  background-color: rgb(144, 208, 238);
+  border-radius: 1rem;
+  width: 100%;
+  box-shadow: 0.5rem 0.5rem 0.1rem rgb(22, 95, 126);
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+::placeholder {
+  color: white;
+}
+
+.bi:hover {
+  color: white;
+}

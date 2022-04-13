@@ -1,0 +1,18 @@
+.background-image {
+  background-image: url("../images/salmon.jpeg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  background-size: cover;
+  height: 100vh;
+}
+
+.background {
+  background-image: url("../images/bg7.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  background-size: cover;
+}

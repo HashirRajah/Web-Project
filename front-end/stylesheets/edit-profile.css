@@ -1,0 +1,35 @@
+.form_bg {
+  background: linear-gradient(to bottom, rgb(14, 14, 14), rgb(41, 39, 39));
+  /* height: 100vh;
+    display: flex;
+    align-items: center; */
+}
+
+.section-heading {
+  background-color: #ffc014;
+  color: #ffffff;
+  text-align: center;
+}
+
+.form-control {
+  background-color: rgb(66, 66, 66);
+  color: #ffd106;
+  border: none;
+  outline: none;
+  padding: 23px 10px;
+}
+
+.form-control:focus {
+  background-color: rgb(78, 74, 74);
+  color: #ffd814;
+  border: none;
+  outline: none;
+}
+.background-image {
+  background-image: url("../images/bg/bg-2.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  height: 150vh;
+}

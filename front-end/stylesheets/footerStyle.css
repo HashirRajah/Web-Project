@@ -1,0 +1,27 @@
+footer {
+  position: sticky;
+  top: 100%;
+}
+
+.curve {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.curve svg {
+  position: relative;
+  display: block;
+  width: calc(147% + 1.3px);
+}
+
+.curve .shape-fill {
+  fill: #353430;
+}
+
+#footer {
+  background-color: #353430;
+}

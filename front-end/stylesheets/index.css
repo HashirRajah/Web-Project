@@ -1,0 +1,33 @@
+.top-banner {
+  width: 100%;
+  background: url("../images/bg/bg-6.jpg") no-repeat center;
+  background-size: cover;
+  padding: 16.875rem 0 9.375rem;
+  height: 100vh;
+}
+
+.section-heading {
+  background-color: #ffd814;
+  color: #ffffff;
+  text-align: center;
+}
+
+a::hover {
+  color: yellow;
+}
+
+.animatecontent {
+  color: #ffd814;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: animateContent 3s ease forwards;
+}
+
+@keyframes animateContent {
+  to {
+    opacity: 1;
+  }
+}
