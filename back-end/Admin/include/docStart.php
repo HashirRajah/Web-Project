@@ -15,4 +15,4 @@
     <?php endif; ?>
     <title><?php echo $title; ?></title>
   </head>
-  <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+  <body class="bg-light" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
