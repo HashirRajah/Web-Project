@@ -33,7 +33,7 @@
     <section id="quick-links" style="display: none">
         <div class="row my-3 align-items-center justify-content-center text-center">
             <?php foreach($quickLinks as $ql): ?>
-                <div class="col-6 col-md-3">
+                <div class="col-8 col-md-3">
                     <div class="card border-1 border-dark shadow rounded my-3 bg-dark text-white">
                         <div class="card-body">
                             <p class="card-title fs-1 lead"><?php echo $ql["title"]; ?></p>
