@@ -58,7 +58,7 @@
             $status = $stmt->execute();
             if($status){
                 $response["status"] = "success";
-                $response["message"] = "comment-banned";
+                $response["message"] = "comment-accepted";
             } else {
                 $response["status"] = "failure";
                 $response["message"] = "query-failed";

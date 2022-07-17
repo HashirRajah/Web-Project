@@ -1,0 +1,19 @@
+Options +FollowSymlinks
+RewriteEngine on
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+#Options -MultiViews
+
+# map neat URL to internal URL
+#reviews
+RewriteRule ^review[/]?$   RestController.php?resource=review [nc,qsa]
+# orders
+RewriteRule ^order[/]?$   RestController.php?resource=order [nc,qsa]
+# order details
+RewriteRule ^order-details[/]?$   RestController.php?resource=order-details [nc,qsa]
+# payments
+RewriteRule ^payment[/]?$   RestController.php?resource=payment [nc,qsa]
+# staffs
+RewriteRule ^staff[/]?$   RestController.php?resource=staff [nc,qsa]
+# menu
+RewriteRule ^menu[/]?$   RestController.php?resource=menu [nc,qsa]
