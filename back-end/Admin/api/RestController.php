@@ -73,5 +73,18 @@
                     break;
             }
             break;
+        case "order":
+            //
+            $orderHandler = new OrderHandler();
+            //
+            switch($operation){
+                case "read":
+                    $orderHandler->getOrders($_GET);
+                    break;
+                case "update":
+                    $orderHandler->updateOrder($_PUT);
+                    break;
+            }
+            break;
     }
 ?>

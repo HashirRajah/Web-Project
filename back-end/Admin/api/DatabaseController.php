@@ -75,6 +75,28 @@
             //
             return $response;
         }
+        //transactions
+        public function transaction($array){
+            //
+            $response = ["status" => "", "row-count" => ""];
+            //
+            //begin
+            $this->conn->beginTransaction();
+            //execute all queries
+            foreach($array as $query){
+                $result = $this->cudQuery($query["sql"], $query["data"]);
+                //
+                if($result["status"] === "error"){
+                    $this->conn->rollBack();
+                    $response["status"] = "error";
+                    return $response;
+                }
+            }
+            //end
+            $this->conn->commit();
+            //
+            return $response;
+        }
         //destructor
         function __destruct(){
             $this->conn = null;
