@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+
+:root {
+    --bg-color: hsl(49 37% 94%);
+    --typewriterSpeed: 1s;
+    --typewriterCharacters: 24;
+  }
+  
+  
+  body{
+    background: rgba(0, 0, 0, 0.7) url(../images/image.jpg) !important;
+    background-size:cover !important;
+    background-position:center !important;
+    background-blend-mode: darken !important;
+    height:100vh !important;
+    display:flex !important;
+    flex-direction:column !important;
+    margin:0px !important;
+    padding:0px !important;
+    /* justify-content: center;
+    align-items: center; */
+    margin: 0 !important;
+    font-family: "Source Sans Pro", sans-serif !important;
+    min-height: 100vh !important;
+    display: grid !important;
+    place-content: center !important;
+    text-align: center !important;
+    
+  }
+  
+
+  
+  .ptext{
+    position: relative;
+    /* top: 30%;
+    left: 80px; */
+  }
+  .showcase h1{
+    font-size:65px;
+    color: #fff;
+    font-family: "Tempus Sans ITC";
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  .showcase h2{
+    font-size: 40px;
+    text-transform: capitalize;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid black;
+    width: 50ch;
+    color:rgb(255, 255, 255);
+    font-family: cursive;
+    letter-spacing: 4px;
+
+    animation: typist 3s steps(38, end),
+                blink step-end 1s infinite;
+  }
+  @keyframes typist{
+
+    from{width: 0}
+    to{width: 100%}
+    /* 0%{width: 0ch;}
+    47%{width: 7;}
+    70%{width: 7;} */
+    /* 75%{width: 0ch;}
+    100%{ width: 0ch;} */
+  }
+  @keyframes blink{
+    from, to{border-color: transparent;}
+    50%{border-color: black;}
+  }
+
+
+  .button {
+    color: hsl(0 0% 0% / 0.7);
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: fadeInUp 2s ease calc(var(--typewriterSpeed) + 2s) forwards;
+  }
+  
+  @keyframes typewriter {
+    to {
+      left: 100%;
+    }
+  }
+  
+  @keyframes blink {
+    to {
+      background: transparent;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+.button{
+    font-size:30px;
+    letter-spacing: 2 rem;
+    text-decoration:none;
+    color:#ffbb00;
+    border:#ffbb00 5px solid;
+    padding:10px 20px;
+    border-radius:20px;
+    margin-top:20px;
+  }
+ .button:hover{
+    background:#ffbb00;
+    color:#fff;
+  }
+/* 
+the craxy chef */
+  
+  @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+
+
+  h1 {
+    margin: 0;
+    font-size: 8em;
+    padding: 0;
+    color: white;
+    text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
+      0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
+      0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
+      -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1);
+
+
+  }
+  span {
+    transform:scale(0.9);
+    display:inline-block;
+  }
+  span:first-child {
+    animation: bopB 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
+      alternate;
+  }
+  span:nth-child(2) {
+    animation: bopB 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
+      alternate;
+  }
+  span:last-child {
+    animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
+      infinite alternate;
+  }
+  
+  @keyframes bop {
+    0% {
+      transform: scale(0.9);
+    }
+    50%,
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes bopB {
+    0% {
+      transform: scale(0.9);
+    }
+    80%,
+    100% {
+      transform: scale(1) rotateZ(-3deg);
+    }
+  }
