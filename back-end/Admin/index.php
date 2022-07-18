@@ -7,7 +7,7 @@
 
 ?>
 <?php include_once("./include/docStart.php"); ?>
-<?php include_once("./include/navbar.php"); ?>
+<!-- <?php include_once("./include/navbar.php"); ?> -->
 
 
 
