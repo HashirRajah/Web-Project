@@ -10,7 +10,7 @@
         $location = "Location: " . htmlspecialchars($_GET["destination"]) . ".php";
         $queryString = "?destination={$_GET['destination']}";
     } else {
-        $location = "Location: index.php";   
+        $location = "Location: dashboard.php";   
     }
     //
     $data = array("username" => "", "password" => "");
