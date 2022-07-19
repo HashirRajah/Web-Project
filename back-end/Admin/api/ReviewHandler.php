@@ -38,22 +38,22 @@
             //validations
             $valid = false;
             //
-            if(!isset($data["order-id"])){
+            if(!isset($data["order_id"])){
                 $response["status"] = "error";
                 $response["message"] = "no-order-id-supplied";
                 echo $this->encodeJson($response);
                 die();
             } else {
-                $order_id = $data["order-id"];
+                $order_id = $data["order_id"];
             }
             //
-            if(!isset($data["food-id"])){
+            if(!isset($data["food_id"])){
                 $response["status"] = "error";
                 $response["message"] = "no-food-id-supplied";
                 echo $this->encodeJson($response);
                 die();
             } else {
-                $food_id = $data["food-id"];
+                $food_id = $data["food_id"];
             }
             //
             if(!isset($data["username"])){
@@ -101,22 +101,22 @@
             //validations
             $valid = false;
             //
-            if(!isset($data["order-id"])){
+            if(!isset($data["order_id"])){
                 $response["status"] = "error";
                 $response["message"] = "no-order-id-supplied";
                 echo $this->encodeJson($response);
                 die();
             } else {
-                $order_id = $data["order-id"];
+                $order_id = $data["order_id"];
             }
             //
-            if(!isset($data["food-id"])){
+            if(!isset($data["food_id"])){
                 $response["status"] = "error";
                 $response["message"] = "no-food-id-supplied";
                 echo $this->encodeJson($response);
                 die();
             } else {
-                $food_id = $data["food-id"];
+                $food_id = $data["food_id"];
             }
             //
             if(!isset($data["username"])){

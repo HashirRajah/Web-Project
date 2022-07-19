@@ -9,7 +9,7 @@
     //page meta data
     $title = "Dashboard";
     $moreStyle = false;
-    $scripts = ["get_flagged_reviews.js"];
+    $scripts = ["dashboard.js"];
     //quick links
     $quickLinks = [
         ["title" => "Orders", "color" => "primary", "icon" => "bi bi-card-list", "description" => "View, manage recent or previous orders"], 
