@@ -2,6 +2,7 @@
     //
     require_once("ReviewHandler.php");
     require_once("MenuHandler.php");
+    require_once("MenuCategoryHandler.php");
     require_once("OrderHandler.php");
     require_once("OrderDetailsHandler.php");
     require_once("PaymentHandler.php");
@@ -82,7 +83,42 @@
                     $orderHandler->getOrders($_GET);
                     break;
                 case "update":
-                    $orderHandler->updateOrder($_PUT);
+                    $orderHandler->completeOrder($_PUT);
+                    break;
+            }
+            break;
+        case "menu-category":
+            //
+            $menuCatHandler = new MenuCategoryHandler();
+            //
+            switch($operation){
+                case "read":
+                    $menuCatHandler->getMenuItemsCategory($_GET);
+                    break;
+                case "update":
+                    $menuCatHandler->update($_PUT);
+                    break;
+                case "create":
+                    $menuCatHandler->add($_POST);
+                    break;
+            }
+            break;
+        case "menu":
+            //
+            $menuHandler = new MenuHandler();
+            //
+            switch($operation){
+                case "read":
+                    $menuHandler->getMenuItems($_GET);
+                    break;
+                case "update":
+                    $menuHandler->update($_PUT);
+                    break;
+                case "create":
+                    $menuHandler->add($_POST);
+                    break;
+                case "delete":
+                    $menuHandler->delete($_DELETE);
                     break;
             }
             break;

@@ -78,11 +78,12 @@
         //transactions
         public function transaction($array){
             //
-            $response = ["status" => "", "row-count" => ""];
+            $response = ["status" => "success", "row-count" => ""];
             //
             //begin
             $this->conn->beginTransaction();
             //execute all queries
+            $rc = 0;
             foreach($array as $query){
                 $result = $this->cudQuery($query["sql"], $query["data"]);
                 //
@@ -91,9 +92,13 @@
                     $response["status"] = "error";
                     return $response;
                 }
+                //
+                $rc += $result["row-count"];
             }
             //end
             $this->conn->commit();
+            //
+            $response["row-count"] = $rc;
             //
             return $response;
         }
