@@ -57,7 +57,8 @@ function getOrders(queryString) {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false, 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -112,7 +113,8 @@ function completeOrder(order_id) {
             order_id: order_id
         },
         accepts: "application/json",
-        method: "PUT", 
+        method: "PUT",
+        cache: false, 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }

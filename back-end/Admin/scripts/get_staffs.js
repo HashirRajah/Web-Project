@@ -7,6 +7,10 @@ $(document).ready(function(){
         //
         deleteStaff(username);
     });
+    //
+    $(document).on("click", "#add-staff", function() {
+        window.location.href = `addStaff.php`;
+    });
 });
 //functions
 function getStaffs() {
@@ -15,7 +19,8 @@ function getStaffs() {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false,
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -66,6 +71,7 @@ function deleteStaff(username) {
             username: username
         },
         accepts: "application/json",
+        cache: false,
         method: "DELETE", 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);

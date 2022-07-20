@@ -21,7 +21,12 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 p-3">
             <div class="row text-dark">
-                <h1 class="text-uppercase">Staffs</h1>
+                <div class="col-3"></div>
+                <div class="col-6"><h1 class="text-uppercase">Staffs</h1></div>
+                <div class="col-3 text-end">
+                    <img id="add-staff" src="./images/plus.png" alt="+">
+                    <span class="p-2 fs-4 text-dark">Add</span>
+                </div>
             </div>
             <div id="message" class="p-2 m-2 rounded"></div>
             <div class="row">

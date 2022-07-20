@@ -39,7 +39,8 @@ const getFlaggedComments = () => {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false, 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -92,7 +93,8 @@ const banComment = (comment) => {
             operation: "ban"
         },
         accepts: "application/json",
-        method: "PUT", 
+        method: "PUT",
+        cache: false,
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -121,7 +123,8 @@ const acceptComment = (comment) => {
             operation: "accept"
         },
         accepts: "application/json",
-        method: "PUT", 
+        method: "PUT",
+        cache: false, 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }

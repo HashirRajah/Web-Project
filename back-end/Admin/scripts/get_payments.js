@@ -35,7 +35,8 @@ const getPendingPayments = () => {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false, 
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -77,7 +78,8 @@ const getPaidPayments = () => {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false,
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
@@ -119,7 +121,8 @@ const getPaymentById = (id) => {
     $.ajax({
         url: URL, 
         accepts: "application/json",
-        method: "GET", 
+        method: "GET",
+        cache: false,
         error: function(xhr){
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
         }
