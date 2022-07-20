@@ -2,7 +2,7 @@
 $(document).ready(function(){
     //get flagged comments every 5 seconds
     getFlaggedComments();
-    setInterval(getFlaggedComments, 5000);
+    setInterval(getFlaggedComments, 10000);
     //handle ban comment
     $(document).on("click", ".ban", function() {
         let o_id = $(this).parent().parent().siblings().children(".order-id").val();
@@ -54,12 +54,12 @@ const getFlaggedComments = () => {
                     <td>${flaggedReview.comment}</td>
                     <td>
                         <svg height="25" width="25">
-                            <circle class="accept" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="green" />
+                            <circle class="accept" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="GreenYellow" />
                         </svg>
                     </td>
                     <td>
                         <svg height="25" width="25">
-                            <circle class="ban" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="red" />
+                            <circle class="ban" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="Tomato" />
                         </svg>
                     </td>
                     <td style="display: none"><input class="order-id" type="hidden" name="order-id" value="${flaggedReview.order_id}" /></td>

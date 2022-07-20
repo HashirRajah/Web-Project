@@ -146,10 +146,10 @@
             //
             $response = array("status" => "error", "message" => "");
             //
-            if(isset($data["staff-username"])){
+            if(isset($data["username"])){
                 $type = "staff";
                 //
-                $username = $data["staff-username"];
+                $username = $data["username"];
                 //sql
                 $sql = "DELETE FROM users WHERE username = ? AND type = ?;";
                 //

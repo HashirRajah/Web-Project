@@ -40,6 +40,9 @@
           <li class="nav-item">
             <a class="nav-link <?php if($title === "Payments"){echo "text-warning";} ?>" href="payments.php"><i class="bi bi-cash-coin me-4"></i>Payments</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if($title === "Staffs"){echo "text-warning";} ?>" href="staffs.php"><i class="bi bi-people-fill me-4"></i>Staffs</a>
+          </li>
           <?php if(!$loggedIn): ?>
             <li class="nav-item">
               <a class="nav-link <?php if($title === "Login"){echo "text-warning";} ?>" href="login.php">
