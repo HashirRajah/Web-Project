@@ -20,9 +20,9 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 p-3">
             <div class="row text-dark">
-                <h1 class="text-uppercase">Flagged Comments</h1>
+                <h1 class="text-uppercase">Flagged reviews</h1>
             </div>
-            <div id="message" class=" p-2 m-2 rounded"></div>
+            <div id="message" class="p-2 m-2 rounded"></div>
             <div class="row">
                 <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
                     <div>
@@ -38,6 +38,7 @@
                             <tbody></tbody>
                         </table>
                     </div>
+                    <div id="number-of-flagged-reviews" class="p-2 m-2 rounded"></div>
                 </div>
             </div>
         </div>

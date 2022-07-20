@@ -68,11 +68,15 @@ const getFlaggedComments = () => {
                 `;
             });
             //
-            //$("table#flagged-reviews tbody").remove();
+            $("#number-of-flagged-reviews").html("");
+            $("#number-of-flagged-reviews").removeClass("bg-warning")
             //add content to table
             $("table#flagged-reviews tbody").html(html);
         } else {
             $("table#flagged-reviews tbody").html("");
+            //
+            html = "No flagged reviews.";
+            $("#number-of-flagged-reviews").addClass("bg-warning fs-4 lead text-white").html(html);
         }
     });
 };
