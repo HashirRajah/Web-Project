@@ -1,0 +1,37 @@
+.form_bg {
+    background: linear-gradient(to bottom, rgb(82, 82, 82), rgb(41, 39, 39));
+    background: transparent;
+    /* height: 100vh;
+      display: flex;
+      align-items: center; */
+  }
+  
+  .section-heading {
+    background-color: #ffc014;
+    color: #2e2e2e;
+    text-align: center;
+  }
+  
+  .form-control {
+    background-color: rgb(246, 239, 239);
+    color: #ff9900;
+    border: none;
+    outline: none;
+    padding: 23px 10px;
+  }
+  
+  .form-control:focus {
+    background-color: rgb(158, 155, 144);
+    color: #ffd000;
+    border: none;
+    outline: none;
+  }
+  .background-image {
+    background-image: url("../images/image.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+  
+    background-size: cover;
+    height: 150vh;
+  }
+  
