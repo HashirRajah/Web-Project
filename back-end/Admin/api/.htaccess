@@ -19,3 +19,5 @@ RewriteRule ^staff[/]?$   RestController.php?resource=staff [nc,qsa]
 RewriteRule ^menu[/]?$   RestController.php?resource=menu [nc,qsa]
 # menu
 RewriteRule ^menu-category[/]?$   RestController.php?resource=menu-category [nc,qsa]
+# delivery
+RewriteRule ^delivery[/]?$   RestController.php?resource=delivery [nc,qsa]

@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
                     <div>
-                        <table class="table" id="orders">
+                        <table class="table table-hover" id="orders">
                             <thead>
                                 <tr class="table-warning text-uppercase">
                                 <th scope="col">order-id</th>
@@ -85,7 +85,7 @@
                                 <th scope="col">discount</th>
                                 <th scope="col">order-details</th>
                                 <th scope="col">payment-details</th>
-                                <th scope="col">complete-order</th>
+                                <th class="order-completion-col" scope="col">complete-order</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

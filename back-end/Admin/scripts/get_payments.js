@@ -8,7 +8,7 @@ $(document).ready(function(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     
-    if(typeof urlParams.get('order_id') !== "undefined"){
+    if(typeof urlParams.get('order_id') === "string"){
         let orderID = urlParams.get('order_id');
         getPaymentById(orderID);
     } else {

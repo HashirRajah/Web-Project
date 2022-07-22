@@ -28,11 +28,11 @@
                     <span class="p-2 fs-4 text-dark">Add</span>
                 </div>
             </div>
-            <div id="message" class="p-2 m-2 rounded"></div>
+            <div id="message" class="p-2 m-2 rounded <?php if(isset($_GET["message"])){ echo 'bg-success fs-4 lead text-white'; } ?>"><?php if(isset($_GET["message"])){ echo htmlspecialchars($_GET["message"]); } ?></div>
             <div class="row">
                 <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
                     <div>
-                        <table class="table" id="staffs">
+                        <table class="table table-hover" id="staffs">
                             <thead>
                                 <tr class="table-warning text-uppercase">
                                 <th scope="col">username</th>
