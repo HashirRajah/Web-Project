@@ -3,7 +3,7 @@
     require_once("SimpleRest.php");
     require_once("DatabaseController.php");
     //OrderHandler class
-    class OrderDetailsHandler extends SimpleRest {
+    class DeliveryHandler extends SimpleRest {
         //attributes
         private $dbConn = null;
 
@@ -13,29 +13,29 @@
             $this->dbConn = new DatabaseController();
         }
         //get order details
-        public function getOrderDetails($data){
+        public function getDeliveryDetails($data){
             //
             $statusCode = 200;
             //
             $response = [
                 "status" => "error",
-                "order_details" => null
+                "delivery_details" => null
             ];
             //
             if(isset($data["order_id"])){
                 $order_id = $data["order_id"];
                 //sql
-                $sql = "SELECT  order_id, item_id, price, qty, f.name 
-                        FROM    food_order_details o, food_items f 
-                        WHERE   o.item_id = f.id
-                        AND     order_id = ?;";
+                $sql = "SELECT  * 
+                        FROM    delivery 
+                        WHERE   order_id = ?;";
+                             
                 //qurery
                 $result = $this->dbConn->selectQuery($sql, [$order_id]);
                 //
                 $statusCode = ($result["status"] === "error") ? 404 : 200;
                 //
                 $response["status"] = $result["status"];
-                $response["order_details"] = $result["data"];
+                $response["delivery_details"] = $result["data"];
                     
                 
             } else {

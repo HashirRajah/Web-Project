@@ -48,6 +48,7 @@
                     $_SESSION["user-logged-in"] = $user;
                     include_once("./database/db_disconnect.php");
                     //
+                    
                     header($location);
                     die();
                 } else {
@@ -77,7 +78,7 @@
             </div>
             <div class="row">
                 <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . $queryString; ?>" method="POST">
                     <div class="container text-start text-uppercase">
                         <label for="" class="form-label mb-3">username</label>
                         <input type="text" class="form-control mb-3" name="username" value="<?php echo $data["username"]; ?>" required>

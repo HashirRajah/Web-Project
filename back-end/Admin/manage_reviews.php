@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
                     <div>
-                        <table class="table" id="flagged-reviews">
+                        <table class="table table-hover" id="flagged-reviews">
                             <thead>
                                 <tr class="table-warning text-uppercase">
                                 <th scope="col">username</th>

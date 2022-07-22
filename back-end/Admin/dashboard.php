@@ -12,10 +12,10 @@
     $scripts = ["dashboard.js"];
     //quick links
     $quickLinks = [
-        ["title" => "Orders", "color" => "primary", "icon" => "bi bi-card-list", "description" => "View, manage recent or previous orders"], 
-        ["title" => "Reviews", "color" => "secondary", "icon" => "bi bi-chat-square-text-fill", "description" => "View, manage flagged reviews"], 
-        ["title" => "Staffs", "color" => "danger", "icon" => "bi bi-people-fill", "description" => "View, manage staff"], 
-        ["title" => "Menu", "color" => "success", "icon" => "bi bi-menu-down", "description" => "View, add, remove and modify menu items"]
+        ["title" => "Orders", "link" => "orders.php", "icon" => "bi bi-card-list", "description" => "View, manage recent or previous orders"], 
+        ["title" => "Reviews", "link" => "manage_reviews.php", "icon" => "bi bi-chat-square-text-fill", "description" => "View, manage flagged reviews"], 
+        ["title" => "Staffs", "link" => "staffs.php", "icon" => "bi bi-people-fill", "description" => "View, manage staff"], 
+        ["title" => "Menu", "link" => "menu.php", "icon" => "bi bi-menu-down", "description" => "View, add, remove and modify menu items"]
     ];
 
 ?>
@@ -34,7 +34,7 @@
         <div class="row my-3 align-items-center justify-content-center text-center">
             <?php foreach($quickLinks as $ql): ?>
                 <div class="col-8 col-md-3">
-                    <div class="card border-1 border-dark shadow rounded my-3 bg-dark text-white">
+                    <div id="<?php echo $ql['link']; ?>" class="card border-1 border-dark shadow rounded my-3 bg-dark text-white">
                         <div class="card-body">
                             <p class="card-title fs-1 lead"><?php echo $ql["title"]; ?></p>
                             <p class="card-subtitle lead py-3"><i class="fs-2 <?php echo $ql["icon"]; ?>"></i></p>
