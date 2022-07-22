@@ -249,16 +249,16 @@
                 "menu-items" => null
             ];
             //sql 
-            $sql = "SELECT * FROM food_items";
+            $sql = "SELECT * FROM food_items f, food_item_images i WHERE f.id = i.id";
             //specific id
             if(isset($data["item_id"])){
                 $item_id = $data["item_id"];
-                $sql .= " WHERE id = ?";
+                $sql .= " AND id = ?";
             }
             //specific category
             else if(isset($data["category"])){
                 $category = $data["category"];
-                $sql .= " WHERE cat_id IN (SELECT id FROM food_category WHERE name = ?)";
+                $sql .= " AND cat_id IN (SELECT id FROM food_category WHERE name = ?)";
             }
             $sql .= ";";
             //
