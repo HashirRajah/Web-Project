@@ -50,7 +50,7 @@ function getStarters() {
             $.each(data['menu-items'], function(i, item){
                 html += `
                    <div class="food-items">
-                        <img src= "../../front-end.$starters["link"]; " >
+                        <img src= "../../front-end${item.link}" >
                         <div class="details">
                             <div class="details-sub">
                                 <h5>${item.name}</h5>
@@ -98,7 +98,7 @@ function getMainCourse() {
             $.each(data['menu-items'], function(i, item){
                 html += `
                    <div class="food-items">
-                        <img src= "../../front-end.$starters["link"]; " >
+                        <img src= "../../front-end${item.link}" >
                         <div class="details">
                             <div class="details-sub">
                                 <h5>${item.name}</h5>
@@ -146,7 +146,7 @@ function getDessert() {
             $.each(data['menu-items'], function(i, item){
                 html += `
                    <div class="food-items">
-                        <img src= "../../front-end.$starters["link"]; " >
+                        <img src= "../../front-end${item.link}" >
                         <div class="details">
                             <div class="details-sub">
                                 <h5>${item.name}</h5>
@@ -194,7 +194,7 @@ function getDrinks() {
             $.each(data['menu-items'], function(i, item){
                 html += `
                    <div class="food-items">
-                        <img src= "../../front-end.$starters["link"]; " >
+                        <img src= "../../front-end${item.link}" >
                         <div class="details">
                             <div class="details-sub">
                                 <h5>${item.name}</h5>
