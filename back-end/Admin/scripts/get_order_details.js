@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 
 //
-const getOrderDetails = (order_id) => {
+function getOrderDetails(order_id) {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/order-details?order_id=" + order_id;
     $.ajax({
@@ -64,7 +64,7 @@ const getOrderDetails = (order_id) => {
 };
 
 //get delivery details
-const getDeliveryDetails = (order_id) => {
+function getDeliveryDetails(order_id) {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/delivery?order_id=" + order_id;
     $.ajax({

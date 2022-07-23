@@ -20,8 +20,9 @@
 <!--heading-->
 <br><br>
 <div class="text-center section-heading p-3 m-0 ">
-            <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
-            <p class="lead">Edit a Menu Item</p>
+    <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
+    <p class="lead">Edit a Menu Item</p>
+    <div id="message" class="p-2 m-2 rounded"></div>
 </div>
 <!--edit profile form-->
 <section class="background-image" >
@@ -30,29 +31,31 @@
             <div class="col-lg-6 mx-auto">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . $queryString; ?>" method="POST">
                     <div>
-                        <label class="fs-6 " for="first-name">Update Name</label>
+                        <label class="fs-6 " for="food-name">Update Name</label>
                         <div class="input-wrapper">
-                            <input type="text" name="food-name" id="food-name" class= "form-control" placeholder="Enter Food Name" value="" />
+                            <input type="text" name="food-name" id="food-name" class= "form-control" placeholder="" value="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Update Food Description </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="desc">Update Food Description </label>
+                        <textarea class="form-control" id="desc" rows="3"></textarea>
                     </div>
                     <div>
-                        <label class="fs-6 " for="phone-number fs-3">Update Price</label>
+                        <label class="fs-6 " for="price">Update Price</label>
                         <div class="input-wrapper">
-                            <input type="text" name="price" id="price" class= "form-control" placeholder="Enter Price" value="" />
+                            <input type="text" name="price" id="price" class= "form-control" placeholder="" value="" />
                         </div>
                     </div>
                     <div>
-                        <div class="input-wrapper"> 
-                         <label class="fs-6 " for="phone-number fs-3">Update Food Item Image</label>
-                          <input type="file" class="form-control" id="customFile" />
+                        <label class="fs-6 " for="phone-number fs-3">Update Category</label>
+                        <div class="input-wrapper">
+                            <input type="text" name="category" id="category" class= "form-control" placeholder="" value="" />
                         </div>
+                    </div>
+                    <div>
                     </div>
                 </form>
-                <button class="btn btn-warning btn-lg my-2 mb-3" id="submit">Add Food Item</button>
+                <button class="btn btn-warning btn-lg my-2 mb-3" id="submit">Edit</button>
             </div>
         </div>
     </div>

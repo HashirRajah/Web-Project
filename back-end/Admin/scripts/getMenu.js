@@ -11,19 +11,29 @@ $(document).ready(function(){
         $("ul.list-group").css({"display":"none"});
 
         if($(this).siblings("ul.list-group").hasClass("active-option")){
-            $(this).siblings("ul.list-group").css({"display":"none"}).removeClass("active-option");;
+            $(this).siblings("ul.list-group").fadeOut().removeClass("active-option");;
         }
         else{
-            $(this).siblings("ul.list-group").css({"display":"block"}).addClass("active-option");
+            $(this).siblings("ul.list-group").fadeIn(900).addClass("active-option");
         }
 
         
     });
-
+    //edit
     $(document).on("click", ".edit", function(){
-
-        window.location.href = `editMenu.php?item_id=`;
-
+        let id = $(this).siblings(".item-id").text();
+        window.location.href = `editMenu.php?item_id=${id}`;
+    });
+    //delete
+    $(document).on("click", ".delete-item", function() {
+        let id = $(this).siblings(".item-id").text();
+        let cat = $(this).siblings(".category").text();
+        //
+        deleteItem(id, cat);
+    });
+    //
+    $(document).on("click", "#add-item", function() {
+        window.location.href = `category.php`;
     });
 
 });
@@ -61,7 +71,9 @@ function getStarters() {
 
                             <ul style="display:none;" class="list-group">
                                 <li class="list-group-item edit">Edit</li>
-                                <li class="list-group-item">Delete</li> 
+                                <li class="list-group-item delete-item">Delete</li>
+                                <li class="item-id" style="display:none" >${item.id}</li>
+                                <li class="category" style="display:none" >starters</li>
                             </ul>   
                         </div>
                     </div>
@@ -109,7 +121,9 @@ function getMainCourse() {
 
                             <ul style="display:none;" class="list-group">
                                 <li class="list-group-item edit">Edit</li>
-                                <li class="list-group-item">Delete</li> 
+                                <li class="list-group-item delete-item">Delete</li>
+                                <li class="item-id" style="display:none" >${item.id}</li>
+                                <li class="category" style="display:none" >main</li>
                             </ul>   
                         </div>
                     </div>
@@ -157,7 +171,9 @@ function getDessert() {
 
                             <ul style="display:none;" class="list-group">
                                 <li class="list-group-item edit">Edit</li>
-                                <li class="list-group-item">Delete</li> 
+                                <li class="list-group-item delete-item">Delete</li>
+                                <li class="item-id" style="display:none" >${item.id}</li>
+                                <li class="category" style="display:none" >dessert</li> 
                             </ul>   
                         </div>
                     </div>
@@ -205,7 +221,9 @@ function getDrinks() {
 
                             <ul style="display:none;" class="list-group">
                                 <li class="list-group-item edit">Edit</li>
-                                <li class="list-group-item">Delete</li> 
+                                <li class="list-group-item delete-item">Delete</li>
+                                <li class="item-id" style="display:none" >${item.id}</li>
+                                <li class="category" style="display:none" >drinks</li>
                             </ul>   
                         </div>
                     </div>
@@ -221,4 +239,48 @@ function getDrinks() {
         }
     });
 };
+//
+//
+function deleteItem(id, cat) {
+    let URL = "http://localhost/Web-Project/back-end/Admin/api/menu";
+    $.ajax({
+        url: URL,
+        data: {
+            item_id: id
+        },
+        accepts: "application/json",
+        cache: false,
+        method: "DELETE", 
+        error: function(xhr){
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    }).done(function(data){
+        data = JSON.parse(data);
+        //
+        let html;
+        if(data.message === "Delete successful"){
+            html = "Delete completed";
+            window.location.href = `#`;
+            $("#message").addClass("bg-success fs-4 lead text-white").html(html);
+            switch(cat){
+                case "main":
+                    getMainCourse();
+                    break;
+                case "dessert":
+                    getDessert();
+                    break;
+                case "starters":
+                    getStarters();
+                    break;
+                case "drinks":
+                    getDrinks();
+                    break;
+            }
+        } else {
+            html = "Unexpected error<br />Item could not be deleted.<br />";
+            html += data.message;
+            $("#message").addClass("bg-danger fs-4 lead text-white").html(html);
+        }
+    });
+}
 

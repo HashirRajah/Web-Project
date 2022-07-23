@@ -60,7 +60,7 @@
                 }
             }
             //image link
-            if(empty($data["img-link"]) || !isset($data["img-link"])){
+            if(empty($data["img_link"]) || !isset($data["img_link"])){
                 $response["status"] = "error";
                 $response["message"] = "no-image-supplied";
                 echo $this->encodeJson($response);
@@ -108,7 +108,7 @@
                 $statusCode = ($result["status"] === "error") ? 404 : 200;
                 if($result["status"] === "success"){
                     $response["status"] = "success";
-                    $response["message"] = "insert-successful";
+                    $response["message"] = "Insert successful";
                 } else {
                     $response["status"] = "error";
                     $response["message"] = "insert-fails";
@@ -117,7 +117,7 @@
                 $result = $this->dbConn->selectQuery("SELECT MAX(id) AS max_id FROM food_items;");
                 if($result["status"] === "success"){
                     //
-                    $args2 = [$result["data"][0]["max_id"], $data["img-link"], "{$data['name']} image"];
+                    $args2 = [$result["data"][0]["max_id"], $data["img_link"], "{$data['name']} image"];
                     //
                     $result = $this->dbConn->cudQuery($sql2, $args2);
                     if($result["status"] !== "success"){
@@ -143,8 +143,8 @@
             //
             $response = array("status" => "error", "message" => "");
             //
-            if(isset($data["item-id"])){
-                $id = $data["item-id"];
+            if(isset($data["item_id"])){
+                $id = $data["item_id"];
                 //sql
                 $sql = "DELETE FROM food_items WHERE id = ?;";
                 $sql2 = "DELETE FROM food_item_images WHERE id = ?;";
@@ -253,7 +253,7 @@
             //specific id
             if(isset($data["item_id"])){
                 $item_id = $data["item_id"];
-                $sql .= " AND id = ?";
+                $sql .= " AND f.id = ?";
             }
             //specific category
             else if(isset($data["category"])){

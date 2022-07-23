@@ -1,122 +1,16 @@
 <?php 
-    //start session
-    session_start();
-    //
-    // include_once("./include/functions.php");
-    include_once("./database/db_connect.php");
-    //
-    $queryString = "";
-    //location to redirect user
-    if(isset($_GET["destination"])){
-        $location = "Location: " . htmlspecialchars($_GET["destination"]) . ".php";
-        $queryString = "?destination={$_GET['destination']}";
-    } else {
-        $location = "Location: index.php";   
-    }
-    //form validation
-    $data = array("firstName" => "", "lastName" => "", "phoneNumber" => "", "username" => "", "email" => "", "password" => "");
-    $errors = array("firstNameErr" => "", "lastNameErr" => "", "phoneNumberErr" => "", "usernameErr" => "", "emailErr" => "", "passwordErr" => "");
-    if(isset($_POST["submit"])){
-        //check for empty form
-        //first name
-        if(!isset($_POST["first-name"]) || empty($_POST["first-name"])){
-            $errors["firstNameErr"] = "First Name is required!";
-        } else {
-            $data["firstName"] = sanitize_input($_POST["first-name"]);
-            if(!preg_match("/^[A-Z][a-z]+( [A-Z][a-z]+)*$/", $data["firstName"])){
-                $errors["firstNameErr"] = "First name should consist of one or more words, starting with an uppercase letter followed by lowercase characters, and separated by spaces";
-            }
-        } 
-        //last name
-        if(!isset($_POST["last-name"]) || empty($_POST["last-name"])){
-            $errors["lastNameErr"] = "Last Name is required!";
-        } else {
-            $data["lastName"] = sanitize_input($_POST["last-name"]);
-            if(!preg_match("/^[A-Z][a-z]+$/", $data["lastName"])){
-                $errors["lastNameErr"] = "Last name should consist of one word, starting with an uppercase letter followed by lowercase characters";
-            }
-        }
-        //phone number
-        if(!isset($_POST["phone-number"]) || empty($_POST["phone-number"])){
-            $errors["phoneNumberErr"] = "Phone number is required!";
-        } else {
-            $data["phoneNumber"] = sanitize_input($_POST["phone-number"]);
-            if(!preg_match("/^[\d]+$/", $data["phoneNumber"])){
-                $errors["phoneNumberErr"] = "Phone number should consist of only numbers";
-            }
-        } 
-        //username
-        if(!isset($_POST["username"]) || empty($_POST["username"])){
-            $errors["usernameErr"] = "Username is required!";
-        } else {
-            $data["username"] = sanitize_input($_POST["username"]);
-            //if username already exists
-            $sql = "SELECT * FROM users WHERE username = '{$data['username']}';";
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $conn->query($sql);
-            $user = $result->fetch(PDO::FETCH_ASSOC);
-            if($user){
-                if($user["username"]){
-                    $errors["usernameErr"] = "Username already taken. Choose another one";
-                }
-            }
-        }
-        //email
-        if(!isset($_POST["email"]) || empty($_POST["email"])){
-            $errors["emailErr"] = "Email is required!";
-        } else {
-            $data["email"] = sanitize_input($_POST["email"]);
-            if(!preg_match("/^[a-z\d\.-]+@[a-z\d-]+\.[a-z]{2,8}(\.[a-z]{2,8})*$/", $data["email"])){
-                $errors["emailErr"] = "Email must be a valid address, e.g. me@mydomain.com";
-            }
-        } 
-        //password
-        if(!isset($_POST["password"]) || empty($_POST["password"])){
-            $errors["passwordErr"] = "Password is required!";
-        } else {
-            $data["password"] = sanitize_input($_POST["password"]);
-            if(!preg_match("/^[\w@-]{8,20}$/", $data["password"])){
-                $errors["passwordErr"] = "Password must be alphanumeric (@, _ and - are also allowed) and be 8 - 20
-                characters";
-            }
-        } 
-        //if no errors
-        if(!array_filter($errors)){
-            $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
-            $type = "customer";
-            //prepared statement
-            $insert = "INSERT INTO users VALUES(?,?,?,?,?,?,?);";
-            $stmt = $conn->prepare($insert, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-            $stmt->bindParam(1, $data['username']);
-            $stmt->bindParam(2, $data['firstName']);
-            $stmt->bindParam(3, $data['lastName']);
-            $stmt->bindParam(4, $data['email']);
-            $stmt->bindParam(5, $hashed_password);
-            $stmt->bindParam(6, $data['phoneNumber']);
-            $stmt->bindParam(7, $type);
-            $status = $stmt->execute();
-
-            //if successful redirect user
-            if($status){
-                //
-                $sql = "SELECT * FROM users WHERE username = '{$data['username']}';";
-                $result = $conn->query($sql);
-                $newUser = $result->fetch(PDO::FETCH_ASSOC);
-
-                //disconnect db
-                include_once("./database/db_disconnect.php");
-                $_SESSION["user-logged-in"] = $newUser;
-                //print_r($_SESSION["user-logged-in"]);
-                header($location);
-                die();
-            }
-        }
-    }
-
-    //
-    $title = "AddMenuItems";
-    $moreStyle = true;
-    $styleSheetNames = ["addStaff.css"];
+   //start session
+   session_start();
+   //
+   $title = "Menu";
+   $moreStyle = true;
+   $styleSheetNames = ["addStaff.css", "payments.css"];
+   $scripts = ["add_item.js"];
+   //check if user is not logged in
+   if(!isset($_SESSION["user-logged-in"])){
+       header("Location: login.php?destination=staffs");
+       die();
+   }
 ?>
 
 
@@ -126,61 +20,72 @@
 <!--heading-->
 <br><br>
 <div class="text-center section-heading p-3 m-0 ">
-            <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
-            <p class="lead">Add a Menu Item</p>
+    <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
+    <p class="lead">Add a Menu Item</p>
+    <div id="message" class="p-2 m-2 rounded"></div>
+    <div class="row">
+    <div class="col-5"></div>
+        <div class="col-2">
+            <div id="carouselExampleIndicators" class="carousel" data-bs-ride="false">
+                <div class="carousel-inner text-uppercase">
+                    <div class="carousel-item active starters" data-bs-interval="false">
+                        <p>starters</p>
+                    </div>
+                    <div class="carousel-item main">
+                        <p>main course</p>
+                    </div>
+                    <div class="carousel-item dessert">
+                        <p>dessert</p>
+                    </div>
+                    <div class="carousel-item drinks">
+                        <p>drinks</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev state-change" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next state-change" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-5"></div>
+    </div>
 </div>
 <!--edit profile form-->
 <section class="background-image" >
     <div class="container-lg text-center p-5">
         <div class="row justify-content-center form_bg text-white">
             <div class="col-lg-6 mx-auto">
-                <!-- <div class="row text-center">
-                    <i class="bi bi-person-circle fs-1"></i>
-                    <h3 class="text-warning"><?php echo $_SESSION["user-logged-in"]["username"]; ?></h3>
-                </div> -->
-
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . $queryString; ?>" method="POST">
+                <form action="" method="">
                     <div>
                         <label class="fs-6 " for="first-name">Food Name</label>
                         <div class="input-wrapper">
-                            
-                            <input type="text" name="food-name" id="food-name" class= "form-control" placeholder="Enter Food Name" value="<?php echo $data['firstName']; ?>" />
+                            <input type="text" name="food-name" id="food-name" class= "form-control" placeholder="Enter Food Name" value="" />
                         </div>
-                        <!-- <div class="text-danger">
-                            <?php echo $errors["firstNameErr"]; ?>
-                        </div> -->
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Food Description </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="desc">Food Description </label>
+                        <textarea class="form-control" id="desc" rows="3"></textarea>
                     </div>
                     <div>
                         <label class="fs-6 " for="phone-number fs-3">Price</label>
                         <div class="input-wrapper">
-                            
-                            <input type="text" name="price" id="price" class= "form-control" placeholder="Enter Price" value="<?php echo $data['phoneNumber']; ?>" />
+                            <input type="text" name="price" id="price" class= "form-control" placeholder="Enter Price" value="" />
                         </div>
-                    
                     </div>
-
                     <div>
-                        
                         <div class="input-wrapper">
-                            
                          <label class="fs-6 " for="phone-number fs-3">Upload Food Item Image</label>
-                          <input type="file" class="form-control" id="customFile" />
+                          <input type="file" class="form-control" id="link" />
                         </div>
-                    
                     </div>
-
-
-                    
-                    <input class="btn btn-warning btn-lg btn-info my-2 mb-3 " type="submit" name="submit" value="Add Food Item">
                 </form>
+                <button class="btn btn-warning btn-lg my-2 mb-3" id="submit">Add Food Item</button>
             </div>
         </div>
     </div>
 </section>
-
-
 <?php include_once("./include/docEnd.php"); ?>

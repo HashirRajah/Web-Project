@@ -7,18 +7,19 @@
         die();
     }
     //page meta data
-    $title = "Dashboard";
+    $title = "Menu";
     $moreStyle = false;
-    $scripts = ["category.js", "https://kit.fontawesome.com/a076d05399.js"];
+    $scripts = ["category.js"];
+    //get categories
     //quick links
     $quickLinks = [
-        ["title" => "Starters", "color" => "primary", "icon" => "./images/starter.png", "description" => "View, manage recent or previous orders"], 
-        ["title" => "Main Course", "color" => "secondary", "icon" => "./images/maincourse.png", "description" => "View, manage flagged reviews"], 
-        ["title" => "Desserts", "color" => "danger", "icon" => "./images/dessert.png" , "description"=> "View, manage staff"], 
-        ["title" => "Drinks", "color" => "success", "icon" => "./images/drink.png", "description" => "View, add, remove and modify menu items"],
-        ["title" => "Add Category", "color" => "success", "icon" => "./images/plus.png", "description" => "View, add, remove and modify menu items"]
+        ["title" => "Starters", "id" => 1, "icon" => "./images/starter.png"], 
+        ["title" => "Main Course", "id" => 2, "icon" => "./images/maincourse.png"], 
+        ["title" => "Desserts", "id" => 3, "icon" => "./images/dessert.png"], 
+        ["title" => "Drinks", "id" => 4, "icon" => "./images/drink.png"]
     ];
-
+    //
+    $i = 0;
 ?>
 <?php include("./include/docStart.php"); ?>
 <?php include("./include/navbar.php"); ?>
@@ -28,22 +29,26 @@
 <br />
 <div class="container-fluid m-3">
     <!--welcome-->
-    <p id="welcome-message" class="m-0 lead" >Hello <?php echo $_SESSION["user-logged-in"]["first_name"]; ?> </p>
-    <h1 class="text-dark m-0">Food Category</h1>
+    <h1 class="text-dark m-0 text-center">Choose Category</h1>
     <!--quick links-->
     <section id="quick-links" style="display: none">
-        <div class="row my-3 align-items-center justify-content-center text-center">
             <?php foreach($quickLinks as $ql): ?>
+                <?php if($i % 2 === 0): ?>
+                    <div class="row my-3 align-items-center justify-content-center text-center">
+                <?php endif; ?>
                 <div class="col-8 col-md-3">
-                    <div class="card border-1 border-dark shadow rounded my-3 bg-dark text-white">
+                    <div id="<?php echo $ql["id"]; ?>" class="card border-1 border-dark shadow rounded my-3 bg-dark text-white">
                         <div class="card-body">
                             <p class="card-title fs-1 lead"><?php echo $ql["title"]; ?></p>
                             <p class="card-subtitle lead py-3"><img src="<?php echo $ql["icon"]; ?>"></img></p>
                         </div>
                     </div>
                 </div>
+                <?php if($i % 2 !== 0): ?>
+                    </div>
+                <?php endif; ?>
+                <?php $i++; ?>
             <?php endforeach; ?>
-        </div>
     </section>
 
 </div>

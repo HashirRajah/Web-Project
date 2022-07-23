@@ -75,7 +75,7 @@ function getOrders(queryString) {
 };
 //
 //functions
-const getFlaggedComments = () => {
+function getFlaggedComments() {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/review";
     $.ajax({
