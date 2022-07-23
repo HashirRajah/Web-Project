@@ -4,6 +4,12 @@ A simple RESTful webservices base class
 Use this as a template and build upon it
 Reference : https://phppot.com/php/php-restful-web-service/
 */
+//json schema
+use Opis\JsonSchema\{
+    Validator,
+    ValidationResult,
+    Errors\ErrorFormatter,
+};
 class SimpleRest {
 	
 	private $httpVersion = "HTTP/1.1";
@@ -64,6 +70,28 @@ class SimpleRest {
 
 	public function encodeJson($data){
 		return json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function jsonSchemaValidation($data, $path, $uri){
+		require("../vendor/autoload.php");
+		// Create a new validator
+		$validator = new Validator();
+		// Register our schema
+		$validator->resolver()->registerFile(
+    		$uri, 
+    		$path
+		);
+		// Decode $data
+		$data = json_decode($data);
+		/** @var ValidationResult $result */
+		$result = $validator->validate($data, $uri);
+		//
+		if ($result->isValid()) {
+			return "Valid";
+		} else {
+			// Print errors
+			return (new ErrorFormatter())->format($result->error());
+		}
 	}
 }
 ?>

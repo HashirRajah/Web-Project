@@ -21,3 +21,5 @@ RewriteRule ^menu[/]?$   RestController.php?resource=menu [nc,qsa]
 RewriteRule ^menu-category[/]?$   RestController.php?resource=menu-category [nc,qsa]
 # delivery
 RewriteRule ^delivery[/]?$   RestController.php?resource=delivery [nc,qsa]
+# delivery
+RewriteRule ^reservation[/]?$   RestController.php?resource=reservation [nc,qsa]

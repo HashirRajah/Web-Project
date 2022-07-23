@@ -29,7 +29,13 @@
             <a class="nav-link <?php if($title === "Dashboard"){echo "text-warning";} ?>" aria-current="page" href="dashboard.php"><i class="bi bi-bar-chart-line-fill me-4"></i>Dashboard</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link <?php if($title === "Info"){echo "text-warning";} ?>" aria-current="page" href="info.php"><i class="bi bi-info-circle me-4"></i>Info</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link <?php if($title === "Manage Reviews"){echo "text-warning";} ?>" href="manage_reviews.php"><i class="bi bi-pencil-square me-4"></i>Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if($title === "Reservations"){echo "text-warning";} ?>" href="reservations.php"><i class="bi bi-calendar-event me-4"></i>Reservations</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php if($title === "Orders"){echo "text-warning";} ?>" href="orders.php"><i class="bi bi-bag-check me-4"></i>Orders</a>

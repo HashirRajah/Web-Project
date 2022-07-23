@@ -20,8 +20,14 @@
 
     <!--items-->
     <!--Starters-->
-    <div class="heading2 p-5 m-0 d-flex align-items-center justify-content-center">  
+    <div class="heading2 px-5 pt-5 m-0 d-flex align-items-center justify-content-center">  
         <h3>&mdash; EDIT MENU &mdash; </h3>
+    </div>
+    <div class="heading2 py-2 m-0 d-flex align-items-center justify-content-center">  
+        <img id="add-item" src="./images/plus.png" alt="+">
+    </div>
+    <div class="heading2 p-3 m-0">  
+        <div id="message" class="p-2 m-2 rounded <?php if(isset($_GET["message"])){ echo 'bg-success fs-4 lead text-white'; } ?>"><?php if(isset($_GET["message"])){ echo htmlspecialchars($_GET["message"]); } ?></div>
     </div>
     <div class="heading p-3 m-0 d-flex align-items-center justify-content-center">  
         <h3>&mdash; STARTERS &mdash; </h3>
