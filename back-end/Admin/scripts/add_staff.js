@@ -17,7 +17,7 @@ $(document).ready(function(){
 //api url
 const URL = "http://localhost/Web-Project/back-end/Admin/api/staff";
 //ban comment
-const addStaff = (staff) => {
+function addStaff(staff) {
     $.ajax({
         url: URL,
         data: {
@@ -42,6 +42,7 @@ const addStaff = (staff) => {
             window.location.href = `staffs.php?message=${data.message}`;
         } else {
             html = data.message;
+            window.location.href = `#`;
             $("#message").addClass("bg-danger fs-4 lead text-white").html(html);
         }
     });

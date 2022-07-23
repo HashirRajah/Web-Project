@@ -38,7 +38,7 @@ $(document).ready(function(){
     
 });
 //functions
-const getReservations = (qs) => {
+function getReservations(qs) {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/reservation" + qs;
     $.ajax({

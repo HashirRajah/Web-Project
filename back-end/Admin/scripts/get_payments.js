@@ -29,7 +29,7 @@ $(document).ready(function(){
     
 });
 //functions
-const getPendingPayments = () => {
+function getPendingPayments() {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/payment?payment-status=pending";
     $.ajax({
@@ -72,7 +72,7 @@ const getPendingPayments = () => {
     });
 };
 
-const getPaidPayments = () => {
+function getPaidPayments() {
     //api url
     let URL = "http://localhost/Web-Project/back-end/Admin/api/payment?payment-status=paid";
     $.ajax({
@@ -115,7 +115,7 @@ const getPaidPayments = () => {
     });
 };
 //
-const getPaymentById = (id) => {
+function getPaymentById(id) {
     //api url
     let URL = `http://localhost/Web-Project/back-end/Admin/api/payment?order_id=${id}`;
     $.ajax({

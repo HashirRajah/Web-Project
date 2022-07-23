@@ -35,7 +35,7 @@ $(document).ready(function(){
 //api url
 const URL = "http://localhost/Web-Project/back-end/Admin/api/review";
 //functions
-const getFlaggedComments = () => {
+function getFlaggedComments() {
     $.ajax({
         url: URL, 
         accepts: "application/json",
@@ -83,7 +83,7 @@ const getFlaggedComments = () => {
 };
 
 //ban comment
-const banComment = (comment) => {
+function banComment(comment) {
     $.ajax({
         url: URL,
         data: {
@@ -113,7 +113,7 @@ const banComment = (comment) => {
     });
 };
 //accept comment
-const acceptComment = (comment) => {
+function acceptComment(comment) {
     $.ajax({
         url: URL,
         data: {
