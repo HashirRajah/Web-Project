@@ -9,6 +9,7 @@
     require_once("StaffHandler.php");
     require_once("DeliveryHandler.php");
     require_once("ReservationHandler.php");
+    require_once("InfoHandler.php");
     //RestController request methods
     $operations = [
         "POST" => "create",
@@ -141,6 +142,19 @@
             switch($operation){
                 case "read":
                     $reservationHandler->getReservations($_GET);
+                    break;
+            }
+            break;
+        case "info":
+            //
+            $infoHandler = new InfoHandler();
+            //
+            switch($operation){
+                case "read":
+                    $infoHandler->getRestaurantInfo();
+                    break;
+                case "update":
+                    $infoHandler->update($_PUT);
                     break;
             }
             break;

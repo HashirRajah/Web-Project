@@ -8,7 +8,7 @@
     $scripts = ["edit_menu.js"];
     //check if user is not logged in
     if(!isset($_SESSION["user-logged-in"])){
-        header("Location: login.php?destination=staffs");
+        header("Location: login.php?destination=editMenu");
         die();
     }
 ?>

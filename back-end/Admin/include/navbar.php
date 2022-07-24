@@ -29,7 +29,7 @@
             <a class="nav-link <?php if($title === "Dashboard"){echo "text-warning";} ?>" aria-current="page" href="dashboard.php"><i class="bi bi-bar-chart-line-fill me-4"></i>Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if($title === "Info"){echo "text-warning";} ?>" aria-current="page" href="info.php"><i class="bi bi-info-circle me-4"></i>Info</a>
+            <a class="nav-link <?php if($title === "Info"){echo "text-warning";} ?>" aria-current="page" href="editInfo.php"><i class="bi bi-info-circle me-4"></i>Info</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php if($title === "Manage Reviews"){echo "text-warning";} ?>" href="manage_reviews.php"><i class="bi bi-pencil-square me-4"></i>Reviews</a>

@@ -7,7 +7,11 @@
     $styleSheetNames = ["editMenu.css"];
     $scripts = ["getMenu.js"];
     $title = "Menu";
-    //imports
+    //check if user is not logged in
+    if(!isset($_SESSION["user-logged-in"])){
+        header("Location: login.php?destination=menu");
+        die();
+    }
     
     
 ?>

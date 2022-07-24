@@ -8,7 +8,7 @@
     $scripts = ["add_staff.js"];
     //check if user is not logged in
     if(!isset($_SESSION["user-logged-in"])){
-        header("Location: login.php?destination=order_details");
+        header("Location: login.php?destination=addStaff");
         die();
     }
     
