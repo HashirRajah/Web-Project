@@ -65,6 +65,9 @@
                 case "read":
                     $paymentHandler->getPayments($_GET);
                     break;
+                case "create":
+                    $paymentHandler->add($_POST);
+                    break;
             }
             break;
         case "order-details":
@@ -87,6 +90,9 @@
                     break;
                 case "update":
                     $orderHandler->completeOrder($_PUT);
+                    break;
+                case "create":
+                    $orderHandler->add($_POST);
                     break;
             }
             break;

@@ -31,10 +31,102 @@
     //
     $data = array("card-number" => "", "expiry-date" => "");
     $errors = array("card-numberErr" => "", "expiry-dateErr" => "");
+    //
+    $_SESSION["all-items-ordered"] = array();
+    foreach(($_SESSION["cart"]->getItems()) as $item){
+        $arr = ["id" => $item->getId(), "price" => $item->getUnitPrice(), "qty" => $item->getQty()];
+        array_push($_SESSION["all-items-ordered"], $arr);
+    }
 
 ?>
 <?php include_once("./include/docStart.php"); ?>
 <?php include_once("./include/navbar.php"); ?>
+<?php if($_SESSION["make-payment"]): ?>
+    <script>
+        let username = '<?php echo $_SESSION["user-logged-in"]["username"]; ?>';
+        let cart = '<?php  echo json_encode($_SESSION["all-items-ordered"]); ?>';
+        let amount = '<?php echo $_SESSION["cart"]->getTotalPrice(); ?>';
+        let time = '<?php echo $_SESSION["order-details"]["time"]; ?>';
+        let type = '<?php echo $_SESSION["order-method"]; ?>';
+        //
+        let street = "null";
+        let city = "null";
+        let house_number = "null";
+        let del_ins = "null";
+        if(type == "delivery"){
+            street = '<?php echo $_SESSION["order-details"]["street"]; ?>';
+            city = '<?php echo $_SESSION["order-details"]["city"]; ?>';
+            house_number = '<?php echo $_SESSION["order-details"]["house_number"]; ?>';
+            del_ins = '<?php echo $_SESSION["order-details"]["delivery-instructions"]; ?>';
+        }
+        //
+        $(document).ready(function() {
+            //alert("hey");
+            $(document).on("click", "#submit", function() {
+                //alert("hey");
+                //api url
+                let URL = "http://localhost/Web-Project/back-end/Admin/api/order";
+                $.ajax({
+                    url: URL,
+                    data: {
+                        cart: cart,
+                        time: time,
+                        username: username,
+                        type: type,
+                        street: street,
+                        city: city,
+                        house_number: house_number,
+                        del_ins: del_ins
+                    },
+                    accepts: "application/json",
+                    method: "POST",
+                    cache: false,
+                    error: function(xhr){
+                        alert("An error occured: " + xhr.status + " " + xhr.statusText);
+                    }
+                }).done(function(data){
+                    console.log(data);
+                    data = JSON.parse(data);
+                    if(data.message === "Insert successful"){
+                        console.log("pass 1");
+                        let url = "http://localhost/Web-Project/back-end/Admin/api/payment";
+                        $.ajax({
+                            url: url,
+                            data: {
+                                order_id: data.order_id,
+                                amount: amount
+                            },
+                            accepts: "application/json",
+                            method: "POST",
+                            cache: false,
+                            error: function(xhr){
+                                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+                            }
+                        }).done(function(data){
+                            //console.log(data);
+                            data = JSON.parse(data);
+                            if(data.message === "Insert successful"){
+                                console.log("pass 2");
+                                window.location.replace("view_order.php");
+                            } else {
+                                console.log("fail 2");
+                                html = data.message;
+                                window.location.href = `#`;
+                                $("#message").addClass("bg-danger fs-4 lead text-dark").html(html);
+                            }
+                        });
+
+                    } else {
+                        console.log("fail 1");
+                        html = data.message;
+                        window.location.href = `#`;
+                        $("#message").addClass("bg-danger fs-4 lead text-dark").html(html);
+                    }
+                });
+            });
+        });
+    </script>
+<?php endif; ?>
 
 <div class="container-fluid text-center bg-light p-5">
     <div class="row pt-4">
@@ -43,6 +135,7 @@
             <div class="col-md-6 p-3">
                 <div class="row text-warning">
                     <h1 class="text-uppercase ">Payment</h1>
+                    <div id="message" class="container rounded"></div>
                     <p class="lead fw-bold m-0 text-danger">Your accounts's email and phone number will be used for contacting purposes. Make sure to update them if neccessary.</p>
                     <a href="edit_profile.php?destination=payment" class="link-warning">Update account</a>
                     <p class="lead fw-bold text-danger"> All the star (*) marked boxes must be filled up.</p>
@@ -62,9 +155,9 @@
                                 <span class="text-danger fw-bold">*</span>
                                 <input type="date" class="form-control" name="expiry-date" id="expiry-date"  value="<?php echo $data['expiry-date']?>" required />
                                 <div class="text-danger"><?php echo $errors["expiry-dateErr"]; ?></div>
-                                <div class="text-center"><input type="submit" class="btn btn-warning btn-lg rounded-pill mt-4" name="submit" value="Pay"></div>
                             </div>
                         </form>
+                        <div class="text-center"><button class="btn btn-warning btn-lg rounded-pill mt-4" id="submit">Pay</button></div>
                     </div>
                 </div>
             </div>

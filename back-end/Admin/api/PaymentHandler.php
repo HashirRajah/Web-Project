@@ -12,6 +12,52 @@
         function __construct(){
             $this->dbConn = new DatabaseController();
         }
+        //add
+        public function add($data){
+            //
+            $statusCode = 200;
+            //
+            $response = array("status" => "error", "message" => "");
+            //
+            if(!isset($data["order_id"])){
+                $response["message"] = "no-order-id";
+                echo $this->encodeJson($response);
+                return;
+            }
+            //
+            if(!isset($data["amount"])){
+                $response["message"] = "no-amount";
+                echo $this->encodeJson($response);
+                return;
+            }
+            //
+            $sql = "INSERT INTO payments(order_id, amount, direction, date, status) VALUES(?,?,?,CURDATE(),?);";
+            //
+            $args = [
+                $data["order_id"],
+                $data["amount"],
+                1,
+                "paid"
+            ];
+            //
+            $result = $this->dbConn->cudQuery($sql, $args);
+            //
+            $statusCode = ($result["status"] === "error") ? 404 : 200;
+            //
+            if($result["row-count"] > 0){
+                $response["status"] = "success";
+                $response["message"] = "Insert successful";
+            } else {
+                $response["status"] = "failure";
+                $response["message"] = "Insert fail";
+            }
+            //
+            //headers
+            $requestContentType = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : null;
+		    $this ->setHttpHeaders($requestContentType, $statusCode);
+            //
+            echo $this->encodeJson($response);
+        }
         //get payments
         public function getPayments($data = null){
             //
