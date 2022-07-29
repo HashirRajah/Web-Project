@@ -13,7 +13,7 @@
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $username = $_SESSION["user-logged-in"]["username"];
    
-    $sql = "SELECT * FROM reservations WHERE username = $username AND status = 'pending'" ;
+    $sql = "SELECT * FROM reservations WHERE username = '$username' ORDER BY date;" ;
     $result = $conn->query($sql);
             //fetch all results
     $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -29,36 +29,52 @@
 <br><br><br>
 <div class="text-center section-heading p-5 m-0 ">
     <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
-    <h1 class="lead">No current reservations</h1>
+    <h1 class="lead">Current reservations</h1>
 </div>
-<section >
-    <table border=1>
-        <caption>Reservations</caption>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Time Slot</th>
-            <th>No of People</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-            while($reservations->fetch(PDO::FETCH_ASSOC))
-            { 
-            
-            echo '<td>' . $reservations['id'] . '</td>';
-            echo '<td>' . $reservations['date'] . '</td>';
-            echo '<td>' . $reservations['time_slot'] . '</td>';
-            echo '<td>' . $reservations['no_of_people'] . '</td>';
-            echo '<td>' . $reservations['status'] . '</td>';
-
-            
-            }//end while
-        ?>  
-        </tbody>
-    </table>
-</section>
+<?php if(count($reservations) > 0): ?>
+    <div class="container-fluid text-center p-5">
+        <div class="row pt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 p-3">
+                <div class="row text-dark">
+                    <h1 class="text-uppercase">Reservations</h1>
+                </div>
+                <div id="message" class="p-2 m-2 rounded fs-3">
+                </div>
+                <div class="row">
+                    <div class="container-fluid shadow m-2 p-3 bg-body rounded p-5">
+                        <div>
+                            <table class="table table-hover" id="order">
+                                <thead>
+                                    <tr class="table-warning text-uppercase">
+                                        <th scope="col">date</th>
+                                        <th scope="col">time-slot</th>
+                                        <th scope="col">#no-of-people</th>
+                                        <th scope="col">status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    foreach($reservations as $reservation)
+                                    { 
+                                        echo '<tr>';
+                                        echo '<td>' . $reservation['date'] . '</td>';
+                                        echo '<td>' . $reservation['time_slot'] . '</td>';
+                                        echo '<td>' . $reservation['no_of_people'] . '</td>';
+                                        echo '<td>' . $reservation['status'] . '</td>';
+                                        echo '</tr>';
+                                    }//end for
+                                ?> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+<?php endif; ?>
 <?php include_once("./include/footer.php"); ?>
 <?php include_once("./include/docEnd.php"); ?>

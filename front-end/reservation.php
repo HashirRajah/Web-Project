@@ -210,7 +210,7 @@
         $conn->commit();
 
         //head to home
-        header("Location: index.php?reservation=booked");
+        header("Location: view_reservation.php?reservation=booked");
         die();
     }
     //disconnect db
