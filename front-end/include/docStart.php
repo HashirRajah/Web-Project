@@ -14,5 +14,6 @@
       <?php endforeach; ?>
     <?php endif; ?>
     <title><?php echo $title; ?></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
   </head>
   <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">

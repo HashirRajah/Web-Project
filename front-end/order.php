@@ -7,6 +7,7 @@
     $moreStyle = true;
     $styleSheetNames = ["order.css", "edit-profile.css"];
     $title = "Order";
+    $scripts = ["cart.js"];
     //imports
     include_once("./include/functions.php");
     //connect to database
@@ -165,8 +166,8 @@
                     $_SESSION["cart"]->decrementItem($id);
                 }
                 //adding items
-                if(preg_match("/add_/", $key)){
-                    $id = substr($key, 3);
+                if(preg_match("/add_/", $value)){
+                    $id = substr($value, 3);
                     //echo $id;
                     $_SESSION["cart"]->add($_SESSION[$id]);
                     //print_r($_SESSION["cart"]);
@@ -175,10 +176,10 @@
         }
     } 
     //$_SESSION["bool"] = true;
-
     //disconnect database
     include("./database/db_disconnect.php");
 ?>
+
 <?php include_once("./include/docStart.php"); ?>
 <?php include_once("./include/navbar.php")?>
 <br />
@@ -279,9 +280,10 @@
                         <h1 class="price">RS<?php echo " " . $starters["unit_price"]; ?></h1>
                     </div>
                      <p class="lead"><?php echo $starters["description"]; ?></p>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <input type="submit" name="add_<?php echo $starters["id"]; ?>" class="btn btn-lg btn-warning rounded" value="Add to cart">
-                    </form>
+                    </form> -->
+                    <button id="add_<?php echo $starters["id"]; ?>" class="btn btn-lg btn-warning rounded add" value="">Add to cart</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -358,35 +360,37 @@
     </div>
     <div class="offcanvas-body">
        <?php if(!empty($_SESSION["cart"]->getItems())): ?>
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <?php foreach(($_SESSION["cart"]->getItems()) as $item): ?>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4 text-center">
-                                <img src="<?php echo $item->getImageLink(); ?>" class="img-fluid rounded-pill" alt="<?php echo $item->getName() . " image"; ?>" style="width:50px;height:50px">
-                            </div>
-                            <div class="col-sm-3 text-start">
+            <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST"> -->
+                <div class="all-items">
+                    <?php foreach(($_SESSION["cart"]->getItems()) as $item): ?>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <img src="<?php echo $item->getImageLink(); ?>" class="img-fluid rounded-pill" alt="<?php echo $item->getName() . " image"; ?>" style="width:50px;height:50px">
+                                </div>
+                                <div class="col-sm-3 text-start">
                                 <?php echo $item->getName(); ?>
+                                </div>
+                                <div class="col-sm-2 text-start fw-bold">
+                                    <?php echo $item->getUnitPrice(); ?>
+                                </div>
+                                <div class="col-sm-3 text-end fw-bold">
+                                    <input type="submit" class="btn btn-sm btn-danger text-uppercase p-1" name="remove_<?php echo $item->getId(); ?>" value="remove">
+                                </div>
                             </div>
-                            <div class="col-sm-2 text-start fw-bold">
-                                <?php echo $item->getUnitPrice(); ?>
-                            </div>
-                            <div class="col-sm-3 text-end fw-bold">
-                                <input type="submit" class="btn btn-sm btn-danger text-uppercase p-1" name="remove_<?php echo $item->getId(); ?>" value="remove">
+                            <div class="row m-4">
+                                <div class="col-sm-5 text-end">
+                                    <input type="submit" class="btn btn-sm btn-outline-danger text-uppercase p-1 fw-bolder" name="decrement_<?php echo $item->getId(); ?>" value="-">
+                                </div>
+                                <div class="col-sm-2 text-center"><?php echo $item->getQty(); ?></div>
+                                <div class="col-sm-5 text-start">
+                                    <input type="submit" class="btn btn-sm btn-outline-success text-uppercase p-1 fw-bolder" name="increment_<?php echo $item->getId(); ?>" value="+">
+                                </div>
                             </div>
                         </div>
-                        <div class="row m-4">
-                            <div class="col-sm-5 text-end">
-                                <input type="submit" class="btn btn-sm btn-outline-danger text-uppercase p-1 fw-bolder" name="decrement_<?php echo $item->getId(); ?>" value="-">
-                            </div>
-                            <div class="col-sm-2 text-center"><?php echo $item->getQty(); ?></div>
-                            <div class="col-sm-5 text-start">
-                                <input type="submit" class="btn btn-sm btn-outline-success text-uppercase p-1 fw-bolder" name="increment_<?php echo $item->getId(); ?>" value="+">
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </form>
+                    <?php endforeach; ?>
+                </div>
+            <!-- </form> -->
             <div class="container border-top border-bottom border-3 border-dark">
                 <div class="row p-3">
                     <div class="col-sm-6 text-uppercase">Number of items</div>
