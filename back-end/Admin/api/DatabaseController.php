@@ -25,6 +25,10 @@
                 echo "<div><strong>CONNECTION ERROR</strong>: " . $e->getMessage() . "</div>";
             }
         }
+        //
+        public function getConn(){
+            return $this->conn;
+        }
         //prepared statement
         public function preparedStatement($sql){
             $stmt = $this->conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

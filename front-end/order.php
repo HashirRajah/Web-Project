@@ -144,47 +144,22 @@
                 }
             }
         }
-        //handle cart
-        if(isset($_SESSION["cart"]) && isset($_SESSION["order-info"]) && isset($_SESSION["item-objects"])){
-            foreach($_POST as $key => $value){
-                //removing items
-                if(preg_match("/remove_/", $key)){
-                    $id = substr($key, 7);
-                    $id = intval($id);
-                    $_SESSION["cart"]->remove($id);
-                }
-                //incrementing items
-                if(preg_match("/increment_/", $key)){
-                    $id = substr($key, 10);
-                    $id = intval($id);
-                    $_SESSION["cart"]->incrementItem($id);
-                }
-                //decrementing items
-                if(preg_match("/decrement_/", $key)){
-                    $id = substr($key, 10);
-                    $id = intval($id);
-                    $_SESSION["cart"]->decrementItem($id);
-                }
-                //adding items
-                if(preg_match("/add_/", $value)){
-                    $id = substr($value, 3);
-                    //echo $id;
-                    $_SESSION["cart"]->add($_SESSION[$id]);
-                    //print_r($_SESSION["cart"]);
-                }
-            }
-        }
+        
     } 
     //$_SESSION["bool"] = true;
     //disconnect database
     include("./database/db_disconnect.php");
 ?>
-
 <?php include_once("./include/docStart.php"); ?>
 <?php include_once("./include/navbar.php")?>
 <br />
 <br />
 <br />
+<?php if (isset($_SESSION["cart"])): ?>
+    <script>
+        
+    </script>
+<?php endif; ?>
 <?php if(!$_SESSION["bool"]): ?>
     <div class="text-center section-heading p-5 m-0 ">
         <h2> Hello <span> <?php echo $_SESSION["user-logged-in"]["username"]; ?> </span></h2>
@@ -302,9 +277,10 @@
                         <h1 class="price">RS<?php echo " " . $main["unit_price"]; ?></h1>
                     </div>
                      <p class="lead"><?php echo $main["description"]; ?></p>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <input type="submit" name="add_<?php echo $main["id"]; ?>" class="btn btn-lg btn-warning rounded" value="Add to cart">
-                    </form>
+                    </form> -->
+                    <button id="add_<?php echo $main["id"]; ?>" class="btn btn-lg btn-warning rounded add" value="">Add to cart</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -323,9 +299,10 @@
                         <h1 class="price">RS<?php echo " " . $dessert["unit_price"]; ?></h1>
                     </div>
                      <p class="lead"><?php echo $dessert["description"]; ?></p>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <input type="submit" name="add_<?php echo $dessert["id"]; ?>" class="btn btn-lg btn-warning rounded" value="Add to cart">
-                    </form>
+                    </form> -->
+                    <button id="add_<?php echo $dessert["id"]; ?>" class="btn btn-lg btn-warning rounded add" value="">Add to cart</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -344,9 +321,10 @@
                         <h1 class="price">RS<?php echo " " . $drink["unit_price"]; ?></h1>
                     </div>
                      <p class="lead"><?php echo $drink["description"]; ?></p>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <input type="submit" name="add_<?php echo $drink["id"]; ?>" class="btn btn-lg btn-warning rounded" value="Add to cart">
-                    </form>
+                    </form> -->
+                    <button id="add_<?php echo $drink["id"]; ?>" class="btn btn-lg btn-warning rounded add" value="">Add to cart</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -359,11 +337,10 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-       <?php if(!empty($_SESSION["cart"]->getItems())): ?>
             <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST"> -->
                 <div class="all-items">
-                    <?php foreach(($_SESSION["cart"]->getItems()) as $item): ?>
-                        <div class="container">
+                    <!-- <?php foreach(($_SESSION["cart"]->getItems()) as $item): ?> -->
+                        <!-- <div class="container">
                             <div class="row">
                                 <div class="col-sm-4 text-center">
                                     <img src="<?php echo $item->getImageLink(); ?>" class="img-fluid rounded-pill" alt="<?php echo $item->getName() . " image"; ?>" style="width:50px;height:50px">
@@ -387,18 +364,18 @@
                                     <input type="submit" class="btn btn-sm btn-outline-success text-uppercase p-1 fw-bolder" name="increment_<?php echo $item->getId(); ?>" value="+">
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        </div> -->
+                    <!-- <?php endforeach; ?> -->
                 </div>
             <!-- </form> -->
             <div class="container border-top border-bottom border-3 border-dark">
                 <div class="row p-3">
                     <div class="col-sm-6 text-uppercase">Number of items</div>
-                    <div class="col-sm-6 text-danger text-end fw-bold"><?php echo $_SESSION["cart"]->getTotalItems(); ?></div>
+                    <div id="total-items" class="col-sm-6 text-danger text-end fw-bold"><?php echo $_SESSION["cart"]->getTotalItems(); ?></div>
                 </div>
                 <div class="row p-3">
                     <div class="col-sm-6 text-uppercase">total cost</div>
-                    <div class="col-sm-6 text-danger text-end fw-bold"><?php echo "Rs " . $_SESSION["cart"]->getTotalPrice(); ?></div>
+                    <div id="total-price" class="col-sm-6 text-danger text-end fw-bold"><?php echo "Rs " . $_SESSION["cart"]->getTotalPrice(); ?></div>
                 </div>
             </div>
             <div class="p-5">
@@ -443,13 +420,6 @@
             <div class="container text-center mt-3 mb-3">
                 <a href="payment.php" class="btn btn-lg btn-warning text-uppercase">checkout</a>
             </div>
-       <?php else: ?>
-            <div class="container">
-                <p class="lead text-center text-danger fw-bold">
-                    Your cart is currently empty
-                </p>
-            </div>
-       <?php endif; ?>
     </div>
 </div>
 <?php include_once("./include/footer.php"); ?>

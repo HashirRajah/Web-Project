@@ -29,27 +29,28 @@
     <div class="container-lg text-center p-5">
         <div class="row justify-content-center form_bg text-white">
             <div class="col-lg-6 mx-auto">
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . $queryString; ?>" method="POST">
+                <form action="" method="">
                     <div>
-                        <label class="fs-6 " for="food-name">Update Name</label>
+                        <label class="fs-6 " for="riptionname">Update Name</label>
                         <div class="input-wrapper">
-                            <input type="text" name="food-name" id="food-name" class= "form-control" placeholder="" value="" />
+                            <input type="text" name="name" id="name" class= "form-control" placeholder="" value="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="desc">Update Food Description </label>
-                        <textarea class="form-control" id="desc" rows="3"></textarea>
+                        <label for="description">Update Food Description </label>
+                        <textarea class="form-control" id="description" rows="3"></textarea>
                     </div>
                     <div>
-                        <label class="fs-6 " for="price">Update Price</label>
+                        <label class="fs-6 " for="unit_price">Update Price</label>
                         <div class="input-wrapper">
-                            <input type="text" name="price" id="price" class= "form-control" placeholder="" value="" />
+                            <input type="text" name="unit_price" id="unit_price" class= "form-control" placeholder="" value="" />
                         </div>
                     </div>
                     <div>
-                        <label class="fs-6 " for="phone-number fs-3">Update Category</label>
+                        <label class="fs-6 " for="cat_id">Update Category</label>
                         <div class="input-wrapper">
-                            <input type="text" name="category" id="category" class= "form-control" placeholder="" value="" />
+                            <select type="text" name="cat_id" id="cat_id" class= "form-control">
+                            </select>
                         </div>
                     </div>
                     <div>

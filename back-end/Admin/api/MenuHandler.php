@@ -207,14 +207,15 @@
             }
             //
             if($api_response["status"] === "success"){
-                $dataUpdate = $data["item_details"];
+                $dataUpdate = json_decode($data["item_details"], true);
                 //sql
                 $sql = "UPDATE food_items SET";
                 //
                 $i = 0;
                 $args = array();
+                $size = count($dataUpdate);
                 foreach($dataUpdate as $key => $value){
-                    if($i != 0 && $i != (count($dataUpdate) - 1)){
+                    if($i != 0 && $i != $size){
                         $sql .= ",";
                     }
                     $sql .= " $key = ?";
@@ -224,6 +225,9 @@
                 }
                 $sql .= " WHERE id = ?;";
                 array_push($args, $item_id);
+                // $response["message"] = $sql;
+                // echo $this->encodeJson($response);
+                // return;
                 //
                 $result = $this->dbConn->cudQuery($sql, $args);
                 //

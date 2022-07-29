@@ -22,14 +22,14 @@ $(document).ready(function(){
         getOrders(queryString);
     });
     //update orders each 9 secs
-    function getPayments() {
+    function getOrdersPeriodically() {
         type = $("#pick-up_delivery .active").children("p").text();
         status = $("#carouselExampleIndicators .active").children("p").text();
         queryString = `?order-status=${status}&type=${type}`;
         getOrders(queryString);
     }
     //
-    setInterval(getPayments, 9000);
+    setInterval(getOrdersPeriodically, 9000);
     //load more details
     //complete an order
     $(document).on("click", ".complete-order", function() {
@@ -137,7 +137,7 @@ function completeOrder(order_id) {
         if(data.message === "order-completed"){
             html = "Order completed";
             $("#message").addClass("bg-success fs-4 lead text-white").html(html);
-            getFlaggedComments();
+            
         } else {
             html = "Unexpected error<br />Order could not be completed.";
             $("#message").addClass("bg-danger fs-4 lead text-white").html(html);

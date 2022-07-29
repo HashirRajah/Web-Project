@@ -56,7 +56,7 @@
               <?php endif; ?>
               <?php if($title === "Order"): ?>
                 <li class="nav-item">
-                  <a class="nav-link text-warning fw-bold" data-bs-toggle="offcanvas" href="#cart" role="button" aria-controls="cart"><i class="bi bi-cart4"></i></a>
+                  <a class="nav-link text-warning fw-bold" data-bs-toggle="offcanvas" href="#cart" role="button" aria-controls="cart"><i class="bi bi-cart4"><span id="cart-items-count" class="badge bg-danger rounded-pill"><?php echo $_SESSION["cart"]->getTotalItems(); ?></span></i></a>
                 </li>
               <?php endif; ?>
               <!-- <li class="nav-item ms-2 d-none d-md-inline">
