@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reservation;
+use App\Models\Order;
 
-class ReservationController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -6,6 +6,7 @@
     $title = "View Reservation";
     $moreStyle = true;
     $styleSheetNames = ["view-order.css"];
+    $scripts = ["cancel_reservation.js"];
 
     include_once("./include/functions.php");
     include_once("./database/db_connect.php");
@@ -71,7 +72,7 @@
                                         echo '<td>' . $reservation['status'] . '</td>';
                                         echo '<td>
                                                 <svg height="25" width="25">
-                                                    <circle id="' . $reservation['date'] . '" class="cancel" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="yellow" />
+                                                    <circle id="' . $reservation['id'] . '" class="cancel" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="yellow" />
                                                 </svg>
                                             </td>';
                                         echo '</tr>';

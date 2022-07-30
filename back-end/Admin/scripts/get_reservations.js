@@ -35,6 +35,12 @@ $(document).ready(function(){
     //
     getReservations(queryString);
     setInterval(getReservations(queryString), 30000);
+    //
+    $(document).on("click", ".complete-reservation", function(){
+        let id = $(this).attr("id");
+        completeReservation(id);
+        getReservations(queryString);
+    });
     
 });
 //functions
@@ -73,7 +79,7 @@ function getReservations(qs) {
                     html += `
                     <td class="">
                         <svg height="25" width="25">
-                            <circle id="${reservation.id}" class="complete-order" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="GreenYellow" />
+                            <circle id="${reservation.id}" class="complete-reservation" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="GreenYellow" />
                         </svg>
                     </td>
                     `;
@@ -101,7 +107,32 @@ function getReservations(qs) {
     });
 };
 //
-
+function completeReservation(id) {
+    //api url
+    let URL = "http://localhost/Web-Project/back-end/Admin/api/reservation";
+    $.ajax({
+        url: URL, 
+        accepts: "application/json",
+        method: "PUT",
+        data: {
+            operation: "complete",
+            reservation_id: id
+        },
+        cache: false, 
+        error: function(xhr){
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    }).done(function(data){
+        data = JSON.parse(data);
+        if(data.message === "reservation-completed"){
+            html = "Reservation completed";
+            $("#message").addClass("bg-success fs-4 lead text-white").html(html);
+        } else {
+            html = "Unexpected error<br />Reservation could not be completed.";
+            $("#message").addClass("bg-danger fs-4 lead text-white").html(html);
+        }
+    });
+};
 
 
 
