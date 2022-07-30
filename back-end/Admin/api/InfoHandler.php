@@ -31,6 +31,11 @@
             //
             $response["status"] = $result["status"];
             $response["info"] = $result["data"];
+            //schema validation
+            if(!$this->jsonSchemaValidation($this->encodeJson($result["data"]), "../schemas/info_schema.json", "http://api.example.com/info.json")){
+                $response["status"] = "error";
+                $response["info"] = "schema violation";
+            }
             //headers
             $requestContentType = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : null;
 		    $this ->setHttpHeaders($requestContentType, $statusCode);
