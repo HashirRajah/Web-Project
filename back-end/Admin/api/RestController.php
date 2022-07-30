@@ -149,6 +149,11 @@
                 case "read":
                     $reservationHandler->getReservations($_GET);
                     break;
+                case "update":
+                    if(isset($_PUT["operation"])){
+                        ($_PUT["operation"] === "cancel") ? $reservationHandler->cancel($_PUT) : $reservationHandler->complete($_PUT);
+                    } 
+                    break;
             }
             break;
         case "info":

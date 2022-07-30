@@ -51,6 +51,7 @@ function getReservations(qs) {
         }
     }).done(function(data){
         data = JSON.parse(data);
+        let sts = data.reservation_details[0].status;
         if(data.reservation_details !== "no-data"){
             let html = ``;
             $.each(data.reservation_details, function(i, reservation){
@@ -66,12 +67,31 @@ function getReservations(qs) {
                     </td>
                     <td>${reservation.no_of_people}</td>
                     <td>${reservation.status}</td>
-                </tr>
                 `;
+                //
+                if(reservation.status === "pending"){
+                    html += `
+                    <td class="">
+                        <svg height="25" width="25">
+                            <circle id="${reservation.id}" class="complete-order" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="3" fill="GreenYellow" />
+                        </svg>
+                    </td>
+                    `;
+                }
+                //
+                html += `</tr>`;
             });
             $("#reservation-count").html("");
             //add content to table
             $("table#reservations tbody").html(html);
+            //
+            if(sts === "pending"){
+                if(document.querySelector("table#reservations thead tr th.reservation-completion-col") === null){
+                    $("table#reservations thead tr").append('<th class="reservation-completion-col" scope="col">complete-reservation</th>');
+                }
+            } else {
+                $(".reservation-completion-col").remove();
+            }
         } else {
             $("table#reservations tbody").html("");
             //
