@@ -79,6 +79,14 @@
                 $json_data = file_get_contents($url);
                 //
                 $api_response = json_decode($json_data, true);
+                //schema validation
+                $validation = $this->jsonSchemaValidation($json_data, "../schemas/category_schema.json", "http://api.example.com/cat.json");
+                if($validation !== "valid"){
+                    $response["status"] = "error";
+                    $response["message"] = "invalid-schema";
+                    echo $this->encodeJson($response);
+                    return;
+                }
                 //
                 if($api_response["menu-categories"] !== "no-data"){
                     $valid = true;

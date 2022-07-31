@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Item;
+use App\Models\Delivery;
 
 class OrderController extends Controller
 {
+    public function __construct(){
+        $this->middleware("auth");
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,9 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $orders = Order::where("status", "pending")->orderBy('date')->paginate(1);
         //
+        return view("orders.index", ["orders" => $orders]);
     }
 
     /**
@@ -23,7 +34,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -56,7 +67,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -68,7 +79,13 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $order = Order::findOrFail($id);
         //
+        $order->status = "completed";
+        //
+        $order->save();
+        //
+        return redirect('/orders')->with('success', 'Order completed!');
     }
 
     /**

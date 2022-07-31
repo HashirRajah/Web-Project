@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://api.example.com/cat.json",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "menu-categories": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "status",
+      "menu-categories"
+    ]
+  }

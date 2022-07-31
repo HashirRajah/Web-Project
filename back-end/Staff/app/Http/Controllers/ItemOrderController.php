@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //
-use App\Models\Reservation;
-use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Item;
 
-class ReservationController extends Controller
+class ItemOrderController extends Controller
 {
     public function __construct(){
         $this->middleware("auth");
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +20,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::where("status", "pending")->orderBy('date')->paginate(1);
         //
-        return view("reservations.index", ["reservations" => $reservations]);
     }
 
     /**
@@ -32,9 +30,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $customers = Customer::all();
         //
-        return view("reservations.create", ["customers" => $customers]);
     }
 
     /**
@@ -45,16 +41,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $storeData = $request->validate([
-            'customer_id' => 'required|numeric',
-            'date' => 'required|date',
-            'number_of_people' => 'required|numeric',
-            'time_slot' => 'required|date_format:H:i',
-            'status' => 'required|max:255',
-        ]);
-        $reservation = Reservation::create($storeData);
-
-        return redirect('/reservations')->with('success', 'Reservation has been added!');
+        //
     }
 
     /**
@@ -65,7 +52,21 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
+        $order = Order::findOrFail($id);
         //
+        $items = $order->items;
+        //
+        $itemDetails = [];
+        //
+        foreach($items as $item){
+            array_push($itemDetails, Item::find($item->id));
+        }
+        //
+        return view("order_details.show", [
+            "order" => $order,
+            "items" => $items,
+            "item_details" => $itemDetails
+        ]);
     }
 
     /**
@@ -88,13 +89,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reservation = Reservation::findOrFail($id);
         //
-        $reservation->status = "completed";
-        //
-        $reservation->save();
-        //
-        return redirect('/reservations')->with('success', 'Reservation completed!');
     }
 
     /**
@@ -105,10 +100,6 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        $reservation = Reservation::findOrFail($id);
         //
-        $reservation->delete();
-        //
-        return redirect('/reservations')->with('success', 'Reservation removed!');
     }
 }
