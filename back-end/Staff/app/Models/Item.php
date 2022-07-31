@@ -12,7 +12,7 @@ class Item extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
-    //many to many
+    //
     public function orders(){
         return $this->belongsToMany(Order::class);
     }

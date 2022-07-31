@@ -32,9 +32,10 @@
             $response["status"] = $result["status"];
             $response["info"] = $result["data"];
             //schema validation
-            if(!$this->jsonSchemaValidation($this->encodeJson($result["data"]), "../schemas/info_schema.json", "http://api.example.com/info.json")){
+            $valid = $this->jsonSchemaValidation($this->encodeJson($response), "../schemas/info_schema.json", "http://api.example.com/info.json");
+            if($valid !== "Valid"){
                 $response["status"] = "error";
-                $response["info"] = "schema violation";
+                $response["info"] = $valid;
             }
             //headers
             $requestContentType = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : null;
